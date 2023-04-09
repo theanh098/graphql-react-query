@@ -1,6 +1,11 @@
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/build/esm/types.dom';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  UseMutationOptions,
+  UseQueryOptions
+} from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -125,6 +130,16 @@ export enum MediaSoucres {
   Twitter = 'Twitter'
 }
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  signEthereum: SignEthereumResponse;
+};
+
+export type MutationSignEthereumArgs = {
+  message: SiweMessageInputs;
+  signature: Scalars['String'];
+};
+
 export type NotificationModel = {
   __typename?: 'NotificationModel';
   business: BusinessModel;
@@ -219,6 +234,23 @@ export enum ReviewStatuses {
   Rejected = 'rejected'
 }
 
+export type SignEthereumResponse = {
+  __typename?: 'SignEthereumResponse';
+  accessToken: Scalars['String'];
+  refreshToken: Scalars['String'];
+};
+
+export type SiweMessageInputs = {
+  address: Scalars['String'];
+  chainId: Scalars['Float'];
+  domain: Scalars['String'];
+  issuedAt: Scalars['String'];
+  nonce: Scalars['String'];
+  statement: Scalars['String'];
+  uri: Scalars['String'];
+  version: Scalars['String'];
+};
+
 export type UserModel = {
   __typename?: 'UserModel';
   address?: Maybe<Scalars['String']>;
@@ -255,6 +287,27 @@ export type UserModel = {
   website?: Maybe<Scalars['String']>;
 };
 
+export type SignEthereumMutationVariables = Exact<{
+  address: Scalars['String'];
+  chainId: Scalars['Float'];
+  domain: Scalars['String'];
+  issuedAt: Scalars['String'];
+  nonce: Scalars['String'];
+  statement: Scalars['String'];
+  uri: Scalars['String'];
+  version: Scalars['String'];
+  signature: Scalars['String'];
+}>;
+
+export type SignEthereumMutation = {
+  __typename?: 'Mutation';
+  signEthereum: {
+    __typename?: 'SignEthereumResponse';
+    accessToken: string;
+    refreshToken: string;
+  };
+};
+
 export type GetRandombusinessesQueryVariables = Exact<{
   type?: InputMaybe<Scalars['String']>;
   hasBannerOnly?: InputMaybe<Scalars['Boolean']>;
@@ -284,6 +337,43 @@ export type GetRandombusinessesQuery = {
   };
 };
 
+export const SignEthereumDocument = `
+    mutation SignEthereum($address: String!, $chainId: Float!, $domain: String!, $issuedAt: String!, $nonce: String!, $statement: String!, $uri: String!, $version: String!, $signature: String!) {
+  signEthereum(
+    signature: $signature
+    message: {address: $address, chainId: $chainId, domain: $domain, issuedAt: $issuedAt, nonce: $nonce, statement: $statement, uri: $uri, version: $version}
+  ) {
+    accessToken
+    refreshToken
+  }
+}
+    `;
+export const useSignEthereumMutation = <TError = unknown, TContext = unknown>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    SignEthereumMutation,
+    TError,
+    SignEthereumMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    SignEthereumMutation,
+    TError,
+    SignEthereumMutationVariables,
+    TContext
+  >(
+    ['SignEthereum'],
+    (variables?: SignEthereumMutationVariables) =>
+      fetcher<SignEthereumMutation, SignEthereumMutationVariables>(
+        client,
+        SignEthereumDocument,
+        variables,
+        headers
+      )(),
+    options
+  );
 export const GetRandombusinessesDocument = `
     query GetRandombusinesses($type: String, $hasBannerOnly: Boolean, $limit: Int!) {
   randomBusinesses(limit: $limit, type: $type, hasBannerOnly: $hasBannerOnly) {

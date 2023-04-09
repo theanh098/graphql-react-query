@@ -4,7 +4,10 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
-import { useGetRandombusinessesQuery } from './__generated__/graphql';
+import {
+  useGetRandombusinessesQuery,
+  useSignEthereumMutation
+} from './__generated__/graphql';
 import graphqlRequestClient from './lib/grapql-request';
 // import { randomBusinesses } from './queries/random-business.query';
 
@@ -18,6 +21,8 @@ function App() {
 
   //     })
   // });
+
+  const { mutateAsync } = useSignEthereumMutation(graphqlRequestClient);
 
   const { data } = useGetRandombusinessesQuery(graphqlRequestClient, {
     limit: 12

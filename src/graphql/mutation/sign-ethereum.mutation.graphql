@@ -1,0 +1,28 @@
+mutation SignEthereum(
+  $address: String!
+  $chainId: Float!
+  $domain: String!
+  $issuedAt: String!
+  $nonce: String!
+  $statement: String!
+  $uri: String!
+  $version: String!
+  $signature: String!
+) {
+  signEthereum(
+    signature: $signature
+    message: {
+      address: $address
+      chainId: $chainId
+      domain: $domain
+      issuedAt: $issuedAt
+      nonce: $nonce
+      statement: $statement
+      uri: $uri
+      version: $version
+    }
+  ) {
+    accessToken
+    refreshToken
+  }
+}
