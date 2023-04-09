@@ -1,0 +1,22 @@
+query GetRandombusinesses(
+  $type: String
+  $hasBannerOnly: Boolean
+  $limit: Int!
+) {
+  randomBusinesses(limit: $limit, type: $type, hasBannerOnly: $hasBannerOnly) {
+    limit
+    totalReview
+    data {
+      id
+      mainCategory
+      name
+      overview
+      logo
+      followByU
+      medias {
+        id
+        source
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "graphql-react-query",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "gen": "graphql-codegen --config codegen.ts",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "format": "prettier --write \"**/*.+(ts|tsx|json|css|md)\"",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.28.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^3.3.0",
+    "@graphql-codegen/client-preset": "^3.0.0",
+    "@graphql-codegen/typescript-react-query": "^4.1.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.0"
+  }
+}
